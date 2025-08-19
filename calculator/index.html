@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Calculator</title>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <form method="POST" id="calculator">
+        <div class="calc" role="application" aria-label="Calculatrice">
+            <input id="display" class="screen" type="text" inputmode="numeric" aria-label="Écran" placeholder="0" name="calcul" />
+            <div class="keys" aria-label="Touches">
+                <button datakey="C" class="small dellast">C</button>
+                <button datakey="DEL" class="small delall">DEL</button>
+                <button datakey="%" class="op add">%</button>
+                <button datakey="/" class="op add">÷</button>
+
+                <button datakey="7" class="add">7</button>
+                <button datakey="8" class="add">8</button>
+                <button datakey="9" class="add">9</button>
+                <button datakey="*" class="op add">×</button>
+
+                <button datakey="4" class="add">4</button>
+                <button datakey="5" class="add">5</button>
+                <button datakey="6" class="add">6</button>
+                <button datakey="-" class="op add">−</button>
+
+                <button datakey="1" class="add">1</button>
+                <button datakey="2" class="add">2</button>
+                <button datakey="3" class="add">3</button>
+                <button datakey="+" class="op add">+</button>
+
+                <button datakey="0" class="wide add">0</button>
+                <button datakey="." class="add">.</button>
+                <button datakey="=" class="eq" type="submit">=</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
