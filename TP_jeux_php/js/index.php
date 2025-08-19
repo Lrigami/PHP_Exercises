@@ -7,6 +7,11 @@
         $perso_arr = [];
     }
 
+    if (isset($_POST["sup-perso"])) {
+        array_splice($perso_arr, $_POST["sup-perso"], 1);
+        $_SESSION['perso_arr'] = $perso_arr;
+    }
+
     $title = "TP jeux PHP";
     include('../include/header.php');
 ?>
@@ -35,8 +40,10 @@
             </ul>
             <div class="card-body text-center">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Sélectionner</button>
-                    <button type="button" class="btn btn-danger">Supprimer</button>
+                    <button type="submit" class="btn btn-primary">Sélectionner</button>
+                    <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+                        <button type="submit" class="btn btn-danger" name="sup-perso" value="<?=$i?>">Supprimer</button>                        
+                    </form>
                 </div>
             </div>
         </div>
