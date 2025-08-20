@@ -1,24 +1,12 @@
 <?php 
+require_once('./init.php');
 
-if (!isset($_SESSION["auth"])) {
+if (!isset($_SESSION["auth"]) || isset($_GET['deco'])) {
     $_SESSION["auth"] = false;
-    header("Location: ./signin.php");
 }
 
-if (isset($_SESSION["list_user"])) {
-    $userArr = $_SESSION["list_user"];
-} else {
-    $userArr = [
-        [
-            "email" => "user@example.com",
-            "password" => "Mdp1234!"
-        ],
-        [
-            "email" => "user2@example.com",
-            "password" => "Mdp5678!"
-        ]
-    ];
-    $_SESSION["list_user"] = $userArr;
+if ($_SESSION['auth'] == false) {
+    header("Location: ./signin.php");
 }
 
 ?>
@@ -37,13 +25,13 @@ if (isset($_SESSION["list_user"])) {
                 <li>Accueil</li>
                 <li>Profil</li>
                 <li>Liste des utilisateurs</li>
-                <li><button>Déconnexion</button></li>  
+                <?php include('./nav.php'); ?>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Bienvenue</h1>
+        <h1>Bienvenue <?= $_SESSION['user']['username'] ?></h1>
     </main>
 </body>
 </html>

@@ -1,11 +1,5 @@
 <?php
-    session_start();
-
-    if (isset($_SESSION["perso_arr"])) {
-        $perso_arr = $_SESSION["perso_arr"];
-    } else {
-        $perso_arr = [];
-    }
+    require_once('./conf/init.php');
 
     if (isset($_POST["sup-perso"])) {
         array_splice($perso_arr, $_POST["sup-perso"], 1);
@@ -13,7 +7,7 @@
     }
 
     $title = "TP jeux PHP";
-    include('../include/header.php');
+    include('./include/header.php');
 ?>
 
     <header class="p-5 mb-5 bg-body text-body rounded shadow">
