@@ -15,4 +15,15 @@
         ];
         $_SESSION["list_user"] = $userArr;
     }
+
+    if(isset($_SESSION['user'])) {
+        if(isset($_SESSION['user']['persoArr'])) {
+            $persoArr = $_SESSION['user']['persoArr'];
+        } else {
+            $persoArr = [];
+            $_SESSION['user']['persoArr'] = $persoArr;
+        }
+    } else {
+        $persoArr = [];
+    }
 ?>

@@ -15,6 +15,8 @@ require_once('./init.php');
                         $userArr[$i]['token'] = $token;
                         $_SESSION['list_user'] = $userArr;
                         setcookie("auth_token", $token, time()+60*60*24*15, "/", "", false, true);
+                        $userArr[$i]['persoArr'] = [];
+                        $_SESSION['list_perso'] = $userArr[$i]['persoArr'];
                     }    
                     $userFound = true;
                     header("Location: ./index.php");

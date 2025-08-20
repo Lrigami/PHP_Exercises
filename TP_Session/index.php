@@ -14,6 +14,17 @@
         header("Location: ./signin.php");
     }
 
+    if (isset($_POST["nom"])) {
+        array_push($persoArr, $_POST);
+        $_SESSION['user']['persoArr'] = $persoArr;
+        
+    }
+
+    if (isset($_POST["sup-perso"])) {
+        array_splice($persoArr, $_POST["sup-perso"], 1);
+        $_SESSION['user']['persoArr'] = $persoArr;
+    }
+
     if(isset($_GET)) {
         if (isset($_GET['deco'])) {
             $_SESSION["auth"] = false;
@@ -35,6 +46,23 @@
 
     <main>
         <h1>Bienvenue <?= $_SESSION['user']['username'] ?></h1>
+
+        <?php
+            include('./jeu/jeu_header.php');
+            $page = $_GET['page'] ?? '';
+
+            switch ($page) {
+                case 'perso':
+                    include('./jeu/perso.php');
+                    break;
+                case 'add_perso':
+                    include('./jeu/add_perso.php');
+                    break;
+                default:
+                    include('./jeu/perso.php');
+                    break;
+            }
+        ?>
     </main>
 </body>
 </html>
