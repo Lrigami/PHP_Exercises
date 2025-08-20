@@ -1,11 +1,12 @@
 <?php 
 require_once('./init.php');
 
-if (!isset($_SESSION["auth"]) || isset($_GET['deco'])) {
-    $_SESSION["auth"] = false;
+if ($_SESSION['auth'] == false) {
+    header("Location: ./signin.php");
 }
 
-if ($_SESSION['auth'] == false) {
+if (isset($_GET['deco'])) {
+    $_SESSION["auth"] = false;
     header("Location: ./signin.php");
 }
 
@@ -16,18 +17,11 @@ if ($_SESSION['auth'] == false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>TP Session</title>
 </head>
 <body>
-    <header>    
-        <nav>
-            <ul>
-                <li><a href="./index.php">Accueil</a></li>
-                <li>Liste des utilisateurs</li>
-                <?php include('./nav.php'); ?>
-            </ul>
-        </nav>
-    </header>
+    <?php include('./nav.php'); ?>    
 
     <main>
         <h1>Bienvenue <?= $_SESSION['user']['username'] ?></h1>

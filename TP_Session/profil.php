@@ -50,21 +50,15 @@ if ($_SESSION['auth'] == false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Session</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Profil</title>
 </head>
 <body>
-    <header>    
-        <nav>
-            <ul>
-                <li><a href="./index.php">Accueil</a></li>
-                <li>Liste des utilisateurs</li>
-                <?php include('./nav.php'); ?>
-            </ul>
-        </nav>
-    </header>
+    <?php include('./nav.php'); ?>
 
     <main>
         <h1>Votre profil</h1>
+        <h2>Modifier vos informations :</h2>
         <form action="<?= $_SERVER['PHP_SELF']?>" method="post">
             <label for="email">Email :</label>
             <input type="email" name="email" id="email" required value="<?= $_SESSION['user']['email'] ?>">
@@ -74,7 +68,7 @@ if ($_SESSION['auth'] == false) {
             <input type="password" name="password" id="password" required>
             <label for="password-confirm">Confirmer votre mot de passe :</label>
             <input type="password" name="password-confirm" id="password-confirm" required>
-            <button type="submit">S'enregistrer</button>
+            <button type="submit">Confirmer</button>
         </form>
     </main>
 
