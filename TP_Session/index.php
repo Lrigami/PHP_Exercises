@@ -22,8 +22,7 @@ if ($_SESSION['auth'] == false) {
     <header>    
         <nav>
             <ul>
-                <li>Accueil</li>
-                <li>Profil</li>
+                <li><a href="./index.php">Accueil</a></li>
                 <li>Liste des utilisateurs</li>
                 <?php include('./nav.php'); ?>
             </ul>
