@@ -1,15 +1,25 @@
 <?php 
-require_once('./init.php');
+    require_once('./init.php');
 
-if ($_SESSION['auth'] == false) {
-    header("Location: ./signin.php");
-}
+    if (!isset($_SESSION['auth']) && isset($_COOKIE['auth_token'])) {
+        $users = $_SESSION['list_user'] ?? [];
+        foreach ($users as $user) {
+            if (isset($user['token']) && $user['token'] === $_COOKIE['auth_token']) {
+                $_SESSION['auth'] = true;
+                $_SESSION['user'] = $user;
+                break;
+            }
+        }
+    } else if ($_SESSION['auth'] == false) {
+        header("Location: ./signin.php");
+    }
 
-if (isset($_GET['deco'])) {
-    $_SESSION["auth"] = false;
-    header("Location: ./signin.php");
-}
-
+    if(isset($_GET)) {
+        if (isset($_GET['deco'])) {
+            $_SESSION["auth"] = false;
+            header("Location: ./signin.php");
+        }
+    }
 ?>
 
 <!DOCTYPE html>
