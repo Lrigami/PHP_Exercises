@@ -1,16 +1,21 @@
 <?php
     require_once('./init.php');
 
-    if(isset($_POST['deleteUser'])) {
-        array_splice($userArr, $_POST['deleteUser'], 1);
-        $_SESSION['list_user'] = $userArr;
-        header("Location: ./listUser.php");
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if(isset($_POST['deleteUser'])) {
+            array_splice($userArr, $_POST['deleteUser'], 1);
+            $_SESSION['list_user'] = $userArr;
+            header("Location: ./listUser.php");
+        }
+    }
+    
+    if(isset($_GET)) {
+        if (isset($_GET['deco'])) {
+            $_SESSION["auth"] = false;
+            header("Location: ./signin.php");
+        } 
     }
 
-    if (isset($_GET['deco'])) {
-        $_SESSION["auth"] = false;
-        header("Location: ./signin.php");
-    }
 ?>
 
 <!DOCTYPE html>

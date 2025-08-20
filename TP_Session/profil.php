@@ -11,38 +11,40 @@ if ($_SESSION['auth'] == false) {
 
     $isMailValid = true;
     $errMsg = "";
-    if(isset($_POST) && (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password-confirm']))) {
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $isMailValid = false;
-            $errMsg = "Format d'email invalide.";
-        }
-        for($i = 0; $i < count($userArr); $i++) {
-            $emails = array_column($userArr, "email");
-            if(in_array($_POST['email'], $emails)) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if(isset($_POST) && (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password-confirm']))) {
+            if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $isMailValid = false;
-                break;
+                $errMsg = "Format d'email invalide.";
             }
-        }
-        if($isMailValid === true) {
-            if ($_POST['password'] === $_POST['password-confirm']) {
-                $newUser = ['email' => $_POST['email'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'username' => htmlspecialchars($_POST['username'])];
-                $emails = array_column($userArr, 'email');
-                $index = array_search($_SESSION['user']['email'], $emails);
-                if ($index !== false) {
-                    $userArr[$index] = $newUser;
-                    $_SESSION['list_user'] = $userArr;
+            for($i = 0; $i < count($userArr); $i++) {
+                $emails = array_column($userArr, "email");
+                if(in_array($_POST['email'], $emails)) {
+                    $isMailValid = false;
+                    break;
                 }
-                header("Location: ./index.php");
+            }
+            if($isMailValid === true) {
+                if ($_POST['password'] === $_POST['password-confirm']) {
+                    $newUser = ['email' => $_POST['email'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'username' => htmlspecialchars($_POST['username'])];
+                    $emails = array_column($userArr, 'email');
+                    $index = array_search($_SESSION['user']['email'], $emails);
+                    if ($index !== false) {
+                        $userArr[$index] = $newUser;
+                        $_SESSION['list_user'] = $userArr;
+                    }
+                    header("Location: ./profil.php?success=1");
+                    exit;
+                } else {
+                    $errMsg = "Les mots de passes ne correspondent pas.";
+                }
             } else {
-                $errMsg = "Les mots de passes ne correspondent pas.";
+                if(!$errMsg) $errMsg = "Cette adresse mail est déjà utilisée.";
             }
         } else {
-            if(!$errMsg) $errMsg = "Cette adresse mail est déjà utilisée.";
+            $errMsg = "Veuilez remplir tous les champs.";
         }
-    } else {
-        $errMsg = "Veuilez remplir tous les champs.";
     }
-
 ?>
 
 <!DOCTYPE html>

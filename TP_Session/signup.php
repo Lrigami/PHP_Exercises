@@ -3,32 +3,34 @@ require_once('./init.php');
 
     $isMailValid = true;
     $errMsg = "";
-    if(isset($_POST) && (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password-confirm']))) {
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $isMailValid = false;
-            $errMsg = "Format d'email invalide.";
-        }
-        for($i = 0; $i < count($userArr); $i++) {
-            $emails = array_column($userArr, "email");
-            if(in_array($_POST['email'], $emails)) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if(isset($_POST) && (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password-confirm']))) {
+            if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $isMailValid = false;
-                break;
+                $errMsg = "Format d'email invalide.";
             }
-        }
-        if($isMailValid === true) {
-            if ($_POST['password'] === $_POST['password-confirm']) {
-                $newUser = ['email' => $_POST['email'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'username' => htmlspecialchars($_POST['username'])];
-                array_push($userArr, $newUser);
-                $_SESSION['list_user'] = $userArr;
-                header("Location: ./index.php");
+            for($i = 0; $i < count($userArr); $i++) {
+                $emails = array_column($userArr, "email");
+                if(in_array($_POST['email'], $emails)) {
+                    $isMailValid = false;
+                    break;
+                }
+            }
+            if($isMailValid === true) {
+                if ($_POST['password'] === $_POST['password-confirm']) {
+                    $newUser = ['email' => $_POST['email'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'username' => htmlspecialchars($_POST['username'])];
+                    array_push($userArr, $newUser);
+                    $_SESSION['list_user'] = $userArr;
+                    header("Location: ./index.php");
+                } else {
+                    $errMsg = "Les mots de passes ne correspondent pas.";
+                }
             } else {
-                $errMsg = "Les mots de passes ne correspondent pas.";
+                if(!$errMsg) $errMsg = "Cette adresse mail est déjà utilisée.";
             }
         } else {
-            if(!$errMsg) $errMsg = "Cette adresse mail est déjà utilisée.";
+            $errMsg = "Veuilez remplir tous les champs.";
         }
-    } else {
-        $errMsg = "Veuilez remplir tous les champs.";
     }
 ?>
 
