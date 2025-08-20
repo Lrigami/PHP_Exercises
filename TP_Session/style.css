@@ -58,8 +58,8 @@ main {
   flex: 1;
   padding: 2rem;
   min-width: 600px;
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 98%;
+  margin: 2rem;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -69,6 +69,7 @@ h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #2c3e50;
+  text-align: center;
 }
 
 h2 {
@@ -115,6 +116,10 @@ button:hover {
   background: #16a085;
 }
 
+.form-group {
+    margin-bottom: 15px;
+}
+
 /* Tableau */
 table {
   width: 100%;
@@ -155,6 +160,128 @@ p a {
 
 p a:hover {
   text-decoration: underline;
+}
+
+/* ===== Navigation spécifique du jeu ===== */
+.jeu-header {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+
+.jeu-header ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0.8rem 1.2rem;
+  background: #2c3e50;
+  border-radius: 10px;
+}
+
+.jeu-header a {
+  color: #ecf0f1;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.jeu-header a:hover {
+  color: #1abc9c;
+}
+
+/* ===== Liste de personnages ===== */
+section.personnages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.personnage-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  max-width: 300px;
+}
+
+.personnage-card:hover {
+  transform: translateY(-5px);
+}
+
+.personnage-card h5 {
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.personnage-card ul {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.personnage-card li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Actions */
+.personnage-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.personnage-actions form,
+.personnage-actions button {
+  flex: 1;
+}
+
+.personnage-actions button {
+  width: 100%;
+}
+
+/* ===== Formulaire de création de perso ===== */
+form.perso-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+form.perso-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+form.perso-form label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+form.perso-form input,
+form.perso-form select {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+form.perso-form input:focus,
+form.perso-form select:focus {
+  border-color: #1abc9c;
+  outline: none;
+  box-shadow: 0 0 4px rgba(26, 188, 156, 0.3);
+}
+
+form.perso-form input[type="range"] {
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .personnage-actions {
+    flex-direction: column;
+  }
 }
 
 /* Responsive */
